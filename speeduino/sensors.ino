@@ -545,7 +545,7 @@ uint16_t readFuelLevel()
       mathCapacity = configPage13.fuelLevelCapacity * 100;
       if ( configPage13.fuelLevelFull < configPage13.fuelLevelEmpty  ){
         mathMin = configPage13.fuelLevelFull * 20.46;
-        mathMax = configPage13.fuelLevelEmpty * 2.46;
+        mathMax = configPage13.fuelLevelEmpty * 20.46;
       }
       if ( configPage13.fuelLevelFull > configPage13.fuelLevelEmpty  ){
         mathMin = configPage13.fuelLevelEmpty * 20.46;
@@ -598,8 +598,9 @@ tempFuelLevelAveraged = ((tempFuelLevelFloat *3) + (tempFuelLevelAveraged *3) + 
 //          Serial.print(",");
       tempFuelLevelAveraged =  tempFuelLevel + (((tempFuelLevelAveraged - tempFuelLevel)/2)* 0.15);
       tempFuelLevel = constrain(tempFuelLevelAveraged, mathMin, mathMax);
-      if ( configPage13.fuelLevelFull > configPage13.fuelLevelEmpty  ){tempFuelLevelMapped = map(tempFuelLevel, mathMin, mathMax , 0, mathCapacity);}
-      if ( configPage13.fuelLevelFull < configPage13.fuelLevelEmpty  ){tempFuelLevelMapped = map(tempFuelLevel, mathMin, mathMax , mathCapacity, 0);}
+      if ( tempFuelLevel >= 520 ){tempFuelLevelMapped = map(tempFuelLevel, 520, mathMax , (mathCapacity / 2), mathCapacity);}
+      if ( tempFuelLevel < 520  ){tempFuelLevelMapped = map(tempFuelLevel, mathMin, 520 , 0, (mathCapacity / 2));}
+      if ( configPage13.fuelLevelFull < configPage13.fuelLevelEmpty  ){tempFuelLevelMapped = mathCapacity - tempFuelLevelMapped;}
       fuelLevelCounter = 0;
 //                Serial.print("tempFuelLevelMappedA:");
 //    Serial.print(tempFuelLevelMapped); 
