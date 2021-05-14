@@ -1304,9 +1304,10 @@ struct config13 {
   byte unused10_106 : 1;
   byte fuelLevelEmpty;
   byte fuelLevelFull;
-  byte fuelLevelCapacity;  
+  byte fuelLevelCapacity;
+  byte fuelLevelHalf;  
 
-  byte unused12_110_127[18];
+  byte unused12_111_127[17];
 
 #if defined(CORE_AVR)
   };
