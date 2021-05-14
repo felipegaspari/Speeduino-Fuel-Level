@@ -577,13 +577,13 @@ uint16_t readFuelLevel()
     }
 
     if (fuelLevelCounter == counterInterval - (counterInterval / 4)  || fuelLevelCounter == ((counterInterval * 2) + (counterInterval /4)))  {
- tempFuelLevelAveraged = tempFuelLevelAveraged + (((tempFuelLevelFloat - tempFuelLevelAveraged)/2) * 0.3);
-       tempFuelLevelMapped =  currentStatus.fuelLevel  +  (((tempFuelLevelMapped - currentStatus.fuelLevel)/2)* 0.5);
+ tempFuelLevelAveraged = tempFuelLevelAveraged + (((tempFuelLevelFloat - tempFuelLevelAveraged)/2) * 0.2);
+
     
       }
     if (fuelLevelCounter == counterInterval / 4  || fuelLevelCounter ==  counterInterval + (counterInterval / 2)) { 
 tempFuelLevelAveraged = ((tempFuelLevelFloat *3) + (tempFuelLevelAveraged *3) + (tempFuelLevel)) / 7;
-      tempFuelLevelMapped =  currentStatus.fuelLevel  +  (((tempFuelLevelMapped - currentStatus.fuelLevel)/2)* 0.5);
+
 
       }
     if (fuelLevelCounter == (counterInterval * 3)) {
@@ -596,7 +596,7 @@ tempFuelLevelAveraged = ((tempFuelLevelFloat *3) + (tempFuelLevelAveraged *3) + 
 //                      Serial.print("mathMax:");
 //    Serial.print(mathMax); 
 //          Serial.print(",");
-      tempFuelLevelAveraged =  tempFuelLevel + (((tempFuelLevelAveraged - tempFuelLevel)/2)* 0.2);
+      tempFuelLevelAveraged =  tempFuelLevel + (((tempFuelLevelAveraged - tempFuelLevel)/2)* 0.15);
       tempFuelLevel = constrain(tempFuelLevelAveraged, mathMin, mathMax);
       if ( configPage13.fuelLevelFull > configPage13.fuelLevelEmpty  ){tempFuelLevelMapped = map(tempFuelLevel, mathMin, mathMax , 0, mathCapacity);}
       if ( configPage13.fuelLevelFull < configPage13.fuelLevelEmpty  ){tempFuelLevelMapped = map(tempFuelLevel, mathMin, mathMax , mathCapacity, 0);}
